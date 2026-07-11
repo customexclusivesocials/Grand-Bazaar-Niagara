@@ -1,1 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grand Bazaar Niagara — Handcrafted Treasures From Around The World</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#221610;
+    --petrol:#0F4C5C;
+    --petrol-deep:#0A363F;
+    --pomegranate:#A6324A;
+    --gold:#C4952E;
+    --turquoise:#3E93A0;
+    --sand:#F6EEDF;
+    --sand-deep:#EFE3CB;
+    --cream:#FBF6EA;
+    --line: rgba(34,22,16,0.14);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--sand);
+    color:var(--ink);
+    font-family:'Jost', sans-serif;
+    font-weight:400;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,h4{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    line-height:1.1;
+    letter-spacing:-0.01em;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{display:block; max-width:100%; height:auto;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
+  .eyebrow{
+    font-family:'Jost', sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.22em;
+    font-size:12px;
+    font-weight:600;
+    color:var(--pomegranate);
+  }
 
+  /* ---------- Mosaic Divider (signature element) ---------- */
+  .mosaic-divider{
+    width:100%;
+    height:26px;
+    background-repeat:repeat-x;
+    background-size:52px 26px;
+    background-image:
+      linear-gradient(135deg, transparent 47%, var(--gold) 47% 53%, transparent 53%),
+      linear-gradient(45deg, transparent 47%, var(--turquoise) 47% 53%, transparent 53%);
+  }
+  .mosaic-divider.deep{
+    background-image:
+      linear-gradient(135deg, transparent 47%, var(--sand) 47% 53%, transparent 53%),
+      linear-gradient(45deg, transparent 47%, var(--pomegranate) 47% 53%, transparent 53%);
+  }
+
+  /* ---------- Nav ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(246,238,223,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .navbar{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 32px;
+    max-width:1180px; margin:0 auto;
+  }
+  .logo{
+    font-family:'Fraunces', serif;
+    font-size:22px;
+    font-weight:600;
+    display:flex; align-items:center; gap:10px;
+  }
+  .logo .nazar{width:20px; height:20px; flex-shrink:0;}
+  nav ul{display:flex; gap:32px; list-style:none;}
+  nav a{font-size:14px; letter-spacing:0.03em; position:relative; padding-bottom:4px;}
+  nav a::after{content:''; position:absolute; left:0; bottom:0; height:1px; width:0; background:var(--pomegranate); transition:width .25s ease;}
+  nav a:hover::after{width:100%;}
+  .nav-cta{
+    background:var(--petrol); color:var(--cream);
+    padding:10px 20px; border-radius:2px;
+    font-size:13px; letter-spacing:0.04em;
+  }
+  .menu-toggle{display:none; font-size:26px; background:none; border:none; color:var(--ink); cursor:pointer;}
+
+  @media (max-width:840px){
+    nav ul{
+      position:fixed; top:70px; left:0; right:0;
+      background:var(--cream);
+      flex-direction:column; gap:0;
+      max-height:0; overflow:hidden;
+      transition:max-height .3s ease;
+      border-bottom:1px solid var(--line);
+    }
+    nav ul.open{max-height:400px;}
+    nav ul li{padding:16px 32px; border-top:1px solid var(--line);}
+    .nav-cta{display:none;}
+    .menu-toggle{display:block;}
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    display:grid; grid-template-columns:1fr 1fr;
+    min-height:88vh;
+    background:var(--petrol-deep);
+    color:var(--cream);
+    overflow:hidden;
+  }
+  .hero::before{
+    content:'';
+    position:absolute; inset:0;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(196,149,46,0.18), transparent 45%),
+      radial-gradient(circle at 85% 80%, rgba(166,50,74,0.22), transparent 50%);
+    pointer-events:none;
+  }
+  .hero-copy{
+    position:relative; z-index:2;
+    display:flex; flex-direction:column; justify-content:center;
+    padding:80px 56px 80px 32px;
+  }
+  .hero-copy .eyebrow{color:var(--gold);}
+  .hero-copy h1{
+    font-size:clamp(34px, 4.6vw, 58px);
+    margin:18px 0 22px;
+    max-width:11ch;
+  }
+  .hero-copy h1 em{font-style:italic; color:var(--gold);}
+  .hero-copy p{
+    max-width:46ch;
+    font-size:16px;
+    color:rgba(251,246,234,0.82);
+    margin-bottom:26px;
+  }
+  .hero-location{
+    display:flex; align-items:flex-start; gap:10px;
+    font-size:14px;
+    color:rgba(251,246,234,0.75);
+    border-left:2px solid var(--gold);
+    padding-left:14px;
+    margin-bottom:34px;
+  }
+  .hero-btns{display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{
+    display:inline-block;
+    padding:14px 26px;
+    font-size:13px;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    border-radius:2px;
+    transition:all .2s ease;
+    border:1px solid transparent;
+  }
+  .btn-primary{background:var(--gold); color:var(--ink); font-weight:500;}
+  .btn-primary:hover{background:#D8AB48;}
+  .btn-outline{border-color:rgba(251,246,234,0.5); color:var(--cream);}
+  .btn-outline:hover{border-color:var(--gold); color:var(--gold);}
+
+  .hero-image{
+    position:relative;
+    background:#0a2a31;
+  }
+  .hero-image img{
+    width:100%; height:100%; object-fit:cover;
+    position:absolute; inset:0;
+    opacity:0.94;
+  }
+  .hero-image .tag{
+    position:absolute; bottom:28px; left:28px;
+    background:rgba(34,22,16,0.65);
+    color:var(--cream);
+    font-size:12px; letter-spacing:0.06em;
+    padding:8px 14px;
+    border:1px solid rgba(251,246,234,0.3);
+    z-index:2;
+  }
+  @media (max-width:840px){
+    .hero{grid-template-columns:1fr;}
+    .hero-image{min-height:340px; order:-1;}
+    .hero-copy{padding:56px 24px;}
+  }
+
+  /* ---------- Section shell ---------- */
+  section{padding:96px 0;}
+  .section-head{max-width:640px; margin-bottom:56px;}
+  .section-head h2{font-size:clamp(28px,3.4vw,42px); margin:14px 0 16px;}
+  .section-head p{color:rgba(34,22,16,0.7); font-size:15.5px;}
+  .section-head.center{margin-left:auto; margin-right:auto; text-align:center;}
+
+  /* ---------- Featured collections ---------- */
+  .collections{
+    display:grid;
+    grid-template-columns:1.3fr 1fr;
+    gap:20px;
+  }
+  .collection-card{
+    position:relative;
+    background:var(--petrol);
+    border-radius:3px;
+    overflow:hidden;
+    min-height:280px;
+    color:var(--cream);
+  }
+  .collection-card img{
+    position:absolute; inset:0;
+    width:100%; height:100%; object-fit:cover;
+    opacity:0.55;
+    transition:transform .5s ease, opacity .3s ease;
+  }
+  .collection-card:hover img{transform:scale(1.06); opacity:0.42;}
+  .collection-card .cc-inner{
+    position:relative; z-index:2;
+    height:100%;
+    display:flex; flex-direction:column; justify-content:flex-end;
+    padding:30px;
+  }
+  .collection-card .cc-icon{font-size:22px; margin-bottom:8px;}
+  .collection-card h3{font-size:22px; margin-bottom:8px;}
+  .collection-card p{font-size:14px; color:rgba(251,246,234,0.85); max-width:34ch;}
+  .collection-card.tall{grid-row:span 2; min-height:596px;}
+  .collection-card.gold{background:var(--pomegranate);}
+  .collection-card.small{min-height:280px;}
+
+  .collections-grid-2{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:20px;
+    margin-top:20px;
+  }
+  @media (max-width:900px){
+    .collections{grid-template-columns:1fr;}
+    .collection-card.tall{grid-row:auto; min-height:280px;}
+    .collections-grid-2{grid-template-columns:1fr;}
+  }
+  .item-list{list-style:none; margin-top:6px;}
+  .item-list li{
+    font-size:13.5px; color:rgba(251,246,234,0.85);
+    padding:2px 0;
+  }
+  .item-list li::before{content:'— '; color:var(--gold);}
+
+  /* ---------- Meet the curator ---------- */
+  .curator{
+    background:var(--petrol-deep);
+    color:var(--cream);
+  }
+  .curator-inner{
+    display:grid; grid-template-columns:0.85fr 1.15fr; gap:56px; align-items:center;
+  }
+  .curator-frame{
+    position:relative;
+    border:1px solid rgba(196,149,46,0.5);
+    padding:14px;
+  }
+  .curator-frame::before{
+    content:'';
+    position:absolute; inset:-14px;
+    border:1px solid rgba(196,149,46,0.22);
+    pointer-events:none;
+  }
+  .curator-frame img{width:100%; aspect-ratio:4/5; object-fit:cover;}
+  .curator .eyebrow{color:var(--gold);}
+  .curator h2{font-size:clamp(26px,3.2vw,38px); margin:14px 0 20px;}
+  .curator blockquote{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:19px;
+    color:var(--gold);
+    border-left:2px solid var(--gold);
+    padding-left:18px;
+    margin:26px 0;
+  }
+  .curator p{color:rgba(251,246,234,0.82); font-size:15.5px; margin-bottom:16px; max-width:52ch;}
+  @media (max-width:840px){
+    .curator-inner{grid-template-columns:1fr;}
+  }
+
+  /* ---------- Also at the bazaar strip ---------- */
+  .also-strip{
+    background:var(--sand-deep);
+  }
+  .also-grid{
+    display:grid; grid-template-columns:repeat(4, 1fr);
+    gap:20px;
+  }
+  .also-card{
+    background:var(--cream);
+    border:1px solid var(--line);
+    border-radius:3px;
+    overflow:hidden;
+  }
+  .also-card .thumb{aspect-ratio:1/1; overflow:hidden;}
+  .also-card img{width:100%; height:100%; object-fit:cover;}
+  .also-card .cap{padding:16px; font-size:13.5px; color:rgba(34,22,16,0.75);}
+  .also-card .cap b{display:block; font-family:'Fraunces',serif; font-size:15px; color:var(--ink); font-weight:500; margin-bottom:2px;}
+  @media (max-width:840px){ .also-grid{grid-template-columns:repeat(2,1fr);} }
+
+  /* ---------- Shop by origin ---------- */
+  .origin-strip{
+    display:grid; grid-template-columns:repeat(5, 1fr);
+    border:1px solid var(--line);
+    border-radius:3px;
+    overflow:hidden;
+  }
+  .origin-cell{
+    padding:30px 18px;
+    text-align:center;
+    border-right:1px solid var(--line);
+    background:var(--cream);
+    transition:background .2s ease;
+  }
+  .origin-cell:last-child{border-right:none;}
+  .origin-cell:hover{background:var(--sand-deep);}
+  .origin-cell .flag{font-size:26px; margin-bottom:10px; display:block;}
+  .origin-cell span{font-size:13px; letter-spacing:0.03em;}
+  @media (max-width:840px){
+    .origin-strip{grid-template-columns:repeat(2,1fr);}
+    .origin-cell{border-bottom:1px solid var(--line);}
+  }
+
+  /* ---------- Features (why website) ---------- */
+  .features{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .feature-card{
+    background:var(--cream);
+    padding:36px 30px;
+  }
+  .feature-card .fnum{
+    font-family:'Fraunces', serif; font-style:italic;
+    color:var(--pomegranate);
+    font-size:15px; margin-bottom:14px;
+  }
+  .feature-card h3{font-size:19px; margin-bottom:10px;}
+  .feature-card p{font-size:14px; color:rgba(34,22,16,0.68);}
+  @media (max-width:840px){ .features{grid-template-columns:1fr;} }
+
+  /* ---------- Gift guide ---------- */
+  .gift-cards{
+    display:grid; grid-template-columns:repeat(4, 1fr); gap:20px;
+  }
+  .gift-card{
+    background:var(--cream);
+    border:1px solid var(--line);
+    padding:28px 22px;
+    text-align:center;
+    border-radius:3px;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .gift-card:hover{transform:translateY(-4px); box-shadow:0 12px 26px rgba(34,22,16,0.08);}
+  .gift-card .glyph{font-size:24px; margin-bottom:12px;}
+  .gift-card h4{font-family:'Fraunces',serif; font-weight:500; font-size:16.5px; margin-bottom:6px;}
+  .gift-card p{font-size:13px; color:rgba(34,22,16,0.6);}
+  @media (max-width:840px){ .gift-cards{grid-template-columns:repeat(2,1fr);} }
+
+  /* ---------- SEO strip ---------- */
+  .seo-strip{background:var(--petrol); color:var(--cream);}
+  .seo-tags{display:flex; flex-wrap:wrap; gap:12px; margin-top:24px;}
+  .seo-tags span{
+    border:1px solid rgba(251,246,234,0.3);
+    padding:9px 16px;
+    font-size:13px;
+    border-radius:20px;
+    color:rgba(251,246,234,0.85);
+  }
+
+  /* ---------- Final pitch ---------- */
+  .pitch{
+    text-align:center;
+    max-width:760px;
+    margin:0 auto;
+  }
+  .pitch .eyebrow{display:block; margin-bottom:18px;}
+  .pitch h2{font-size:clamp(26px,3.6vw,40px); margin-bottom:24px;}
+  .pitch p{font-size:16px; color:rgba(34,22,16,0.72); margin-bottom:14px;}
+  .pitch .btn-primary{margin-top:20px;}
+
+  /* ---------- Footer ---------- */
+  footer{
+    background:var(--ink);
+    color:rgba(251,246,234,0.75);
+    padding:56px 0 30px;
+  }
+  .footer-grid{
+    display:grid; grid-template-columns:1.4fr 1fr 1fr;
+    gap:40px;
+    padding-bottom:36px;
+    border-bottom:1px solid rgba(251,246,234,0.12);
+  }
+  .footer-grid h4{
+    font-family:'Fraunces', serif; color:var(--cream); font-size:15px;
+    margin-bottom:16px; font-weight:500;
+  }
+  .footer-grid p, .footer-grid li{font-size:13.5px; line-height:1.9;}
+  .footer-grid ul{list-style:none;}
+  .footer-bottom{
+    display:flex; justify-content:space-between; align-items:center;
+    padding-top:24px; font-size:12.5px; flex-wrap:wrap; gap:10px;
+    color:rgba(251,246,234,0.5);
+  }
+  @media (max-width:840px){ .footer-grid{grid-template-columns:1fr;} }
+
+  /* proposal ribbon */
+  .proposal-ribbon{
+    background:var(--gold);
+    color:var(--ink);
+    text-align:center;
+    font-size:12.5px;
+    letter-spacing:0.04em;
+    padding:9px 16px;
+  }
+  .proposal-ribbon b{font-weight:600;}
+</style>
+</head>
+<body>
+
+<div class="proposal-ribbon">Website Design Proposal for Grand Bazaar Niagara — prepared by <b>Custom Exclusive Socials</b></div>
+
+<header>
+  <div class="navbar">
+    <div class="logo">
+      <svg class="nazar" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="20" r="19" fill="#0F4C5C"/>
+        <circle cx="20" cy="20" r="14" fill="#F6EEDF"/>
+        <circle cx="20" cy="20" r="9" fill="#3E93A0"/>
+        <circle cx="20" cy="20" r="4" fill="#221610"/>
+      </svg>
+      Grand Bazaar Niagara
+    </div>
+    <nav>
+      <button class="menu-toggle" onclick="document.getElementById('navlinks').classList.toggle('open')">&#9776;</button>
+      <ul id="navlinks">
+        <li><a href="#collections">Collections</a></li>
+        <li><a href="#origin">Shop by Origin</a></li>
+        <li><a href="#curator">Meet Baris</a></li>
+        <li><a href="#giftguide">Gift Guide</a></li>
+        <li><a href="#visit">Visit</a></li>
+      </ul>
+    </nav>
+    <a href="#giftguide" class="nav-cta">Explore Gifts</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" style="padding:0;">
+  <div class="hero-copy">
+    <span class="eyebrow">Niagara Falls, Ontario</span>
+    <h1>Handcrafted Treasures <em>From Around The World</em></h1>
+    <p>A colourful collection of authentic artisan products — Turkish mosaic lamps, handmade jewelry, unique décor, clothing and cultural gifts — carefully curated by Baris.</p>
+    <div class="hero-location">
+      <span>📍</span>
+      <span>5851 Victoria Avenue, Unit A — beside the Vittoria Inn, Niagara Falls</span>
+    </div>
+    <div class="hero-btns">
+      <a href="#collections" class="btn btn-primary">Explore Our Collections</a>
+      <a href="#visit" class="btn btn-outline">Visit Our Store</a>
+    </div>
+  </div>
+  <div class="hero-image">
+    <img src="chandeliercollection2.jpg" alt="Handcrafted Turkish mosaic lamp collection at Grand Bazaar Niagara">
+    <span class="tag">Turkish Mosaic Lamp Collection</span>
+  </div>
+</section>
+<div class="mosaic-divider"></div>
+
+<!-- FEATURED COLLECTIONS -->
+<section id="collections">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Featured Collections</span>
+      <h2>Every Piece Tells A Story</h2>
+      <p>From the intricate patterns of Turkish mosaic lamps to the symbolism behind evil eye jewelry — a curated world of craftsmanship, one shelf at a time.</p>
+    </div>
+
+    <div class="collections">
+      <div class="collection-card tall">
+        <img src="2025chandeliers.jpg" alt="Turkish mosaic lamps handcrafted collection">
+        <div class="cc-inner">
+          <span class="cc-icon">✨</span>
+          <h3>Turkish Mosaic Lamps</h3>
+          <p>Handcrafted in Türkiye using traditional techniques. Bring warmth, colour, and character into your home with a piece of authentic Turkish artistry.</p>
+        </div>
+      </div>
+      <div class="collection-card gold">
+        <img src="evileyecollection.jpg" alt="Evil eye jewelry and décor collection">
+        <div class="cc-inner">
+          <span class="cc-icon">🧿</span>
+          <h3>Evil Eye Collection</h3>
+          <p>Jewelry and décor inspired by centuries-old traditions symbolizing protection, positivity, and good fortune.</p>
+        </div>
+      </div>
+      <div class="collection-card small">
+        <img src="chandeliers2026.jpg" alt="Home décor and ceramics collection">
+        <div class="cc-inner">
+          <span class="cc-icon">🏺</span>
+          <h3>Home Décor &amp; Ceramics</h3>
+          <p>Decorative plates, ceramic wall art, table décor, sculptures and cultural decorations.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="collections-grid-2">
+      <div class="collection-card small" style="min-height:240px;">
+        <img src="anklet1.jpg" alt="Artisan jewelry and accessories">
+        <div class="cc-inner">
+          <h3 style="font-size:19px;">Artisan Jewelry &amp; Accessories</h3>
+          <ul class="item-list">
+            <li>Anklets &amp; bracelets</li>
+            <li>Necklaces &amp; rings</li>
+            <li>Statement &amp; handcrafted pieces</li>
+          </ul>
+        </div>
+      </div>
+      <div class="collection-card small" style="min-height:240px; background:var(--turquoise);">
+        <img src="ankletevileye1.jpg" alt="Fashion and textiles collection">
+        <div class="cc-inner">
+          <h3 style="font-size:19px;">Fashion &amp; Textiles</h3>
+          <ul class="item-list">
+            <li>Handbags &amp; scarves</li>
+            <li>Traditional-inspired clothing</li>
+            <li>One-of-a-kind fashion pieces</li>
+          </ul>
+        </div>
+      </div>
+      <div class="collection-card small" style="min-height:240px; background:var(--gold); color:var(--ink);">
+        <div class="cc-inner">
+          <span class="cc-icon">🇨🇦</span>
+          <h3 style="font-size:19px;">Canadian Indigenous Art</h3>
+          <p style="color:rgba(34,22,16,0.75);">Celebrating local artistry through authentic Canadian Indigenous handmade pieces — connecting global craftsmanship with Canadian culture.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="mosaic-divider deep"></div>
+
+<!-- MEET THE CURATOR -->
+<section id="curator" class="curator">
+  <div class="wrap curator-inner">
+    <div class="curator-frame">
+      <img src="chandeliercollection2.jpg" alt="Baris, owner and curator of Grand Bazaar Niagara">
+    </div>
+    <div>
+      <span class="eyebrow">Meet The Curator</span>
+      <h2>The Story Behind The Grand Bazaar</h2>
+      <p>Every piece inside the Grand Bazaar has been thoughtfully selected by Baris, who has built a unique collection of handcrafted treasures from around the world.</p>
+      <blockquote>"A place where every item has a story."</blockquote>
+      <p>His passion is bringing beautiful, meaningful, and authentic pieces to Niagara Falls — items that are not mass-produced, but created with creativity, tradition, and craftsmanship.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ALSO AT THE BAZAAR -->
+<section class="also-strip">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Also At The Bazaar</span>
+      <h2>New Arrivals &amp; Unique Finds</h2>
+      <p>The collection changes often — here's a glimpse of what's new on the shelves this season.</p>
+    </div>
+    <div class="also-grid">
+      <div class="also-card">
+        <div class="thumb"><img src="essentialoilbottle2.jpg" alt="Artisan glass and lifestyle accessories"></div>
+        <div class="cap"><b>Artisan Glass &amp; Lifestyle</b>Small handcrafted accents for everyday rituals.</div>
+      </div>
+      <div class="also-card">
+        <div class="thumb"><img src="solar eclipse glasses1.jpg" alt="Novelty and seasonal gift items"></div>
+        <div class="cap"><b>Seasonal &amp; Novelty Finds</b>Fun, unexpected pieces for curious shoppers.</div>
+      </div>
+      <div class="also-card">
+        <div class="thumb"><img src="anklet1.jpg" alt="Handcrafted anklets"></div>
+        <div class="cap"><b>Handcrafted Anklets</b>Delicate, wearable pieces from our jewelry wall.</div>
+      </div>
+      <div class="also-card">
+        <div class="thumb"><img src="ankletevileye1.jpg" alt="Evil eye jewelry accents"></div>
+        <div class="cap"><b>Evil Eye Accents</b>Protection and positivity, wearable every day.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SHOP BY ORIGIN -->
+<section id="origin">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="eyebrow">A Feature That Fits The Brand</span>
+      <h2>Shop By Origin</h2>
+      <p>Discover where each piece comes from — browse the collection by the country and culture that made it.</p>
+    </div>
+    <div class="origin-strip">
+      <div class="origin-cell"><span class="flag">🇹🇷</span><span>Türkiye</span></div>
+      <div class="origin-cell"><span class="flag">🇦🇪</span><span>UAE / Dubai</span></div>
+      <div class="origin-cell"><span class="flag">🌏</span><span>Asia</span></div>
+      <div class="origin-cell"><span class="flag">🇪🇺</span><span>Europe</span></div>
+      <div class="origin-cell"><span class="flag">🇨🇦</span><span>Canada Indigenous Art</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- GIFT GUIDE -->
+<section id="giftguide" style="background:var(--sand-deep);">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">🎁 Niagara Falls Gift Guide</span>
+      <h2>Unique Gifts In Niagara Falls</h2>
+      <p>Built to capture tourist searches like "best souvenirs near Clifton Hill" and "things to buy in Niagara Falls Canada."</p>
+    </div>
+    <div class="gift-cards">
+      <div class="gift-card"><div class="glyph">💰</div><h4>Gifts Under $25</h4><p>Small treasures, big meaning.</p></div>
+      <div class="gift-card"><div class="glyph">🎀</div><h4>Gifts Under $50</h4><p>The sweet spot for souvenirs.</p></div>
+      <div class="gift-card"><div class="glyph">💎</div><h4>Luxury Artisan Gifts</h4><p>Statement pieces to remember Niagara by.</p></div>
+      <div class="gift-card"><div class="glyph">🇨🇦</div><h4>Canadian Souvenirs</h4><p>Local culture, globally curated.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY THIS WEBSITE MATTERS -->
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Why This Website Matters</span>
+      <h2>From Facebook Posts To A Permanent Digital Storefront</h2>
+      <p>Right now, Grand Bazaar's products are shared through Facebook posts that disappear quickly and are hard for new customers to discover. A website changes that.</p>
+    </div>
+    <div class="features">
+      <div class="feature-card"><div class="fnum">Before a visit</div><h3>Discover The Store</h3><p>Tourists can find Grand Bazaar while still planning their Niagara Falls trip — not just by walking past it.</p></div>
+      <div class="feature-card"><div class="fnum">Anytime</div><h3>Browse The Collection</h3><p>Customers explore lamps, jewelry, décor and more on their own time, from anywhere.</p></div>
+      <div class="feature-card"><div class="fnum">Every item</div><h3>Learn The Stories</h3><p>Origins, craftsmanship and cultural meaning — shared the way Baris would tell it in person.</p></div>
+      <div class="feature-card"><div class="fnum">Online</div><h3>Purchase Gifts</h3><p>An organized shop replaces scattered Facebook posts with new arrivals, bestsellers and gift ideas.</p></div>
+      <div class="feature-card"><div class="fnum">On Google</div><h3>Get Found In Search</h3><p>Appear for searches like "souvenir shops Niagara Falls" and "Turkish lamps Canada."</p></div>
+      <div class="feature-card"><div class="fnum">First impression</div><h3>Build Trust</h3><p>A professional storefront builds confidence with tourists and locals before they ever walk in.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SEO -->
+<section class="seo-strip">
+  <div class="wrap">
+    <span class="eyebrow" style="color:var(--gold);">Local SEO Opportunities</span>
+    <h2 style="margin:14px 0 6px; font-size:28px;">What The Website Would Help Grand Bazaar Rank For</h2>
+    <div class="seo-tags">
+      <span>Souvenir shops Niagara Falls Ontario</span>
+      <span>Unique gifts Niagara Falls</span>
+      <span>Turkish lamps Canada</span>
+      <span>Handmade jewelry Niagara Falls</span>
+      <span>Cultural gifts Ontario</span>
+      <span>Middle Eastern gifts Canada</span>
+      <span>Artisan décor Niagara Falls</span>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL PITCH -->
+<section id="visit">
+  <div class="wrap pitch">
+    <span class="eyebrow">The Opportunity</span>
+    <h2>A Unique Identity, Ready For A Digital Home</h2>
+    <p>Grand Bazaar Niagara already has what most businesses spend years trying to create — a unique identity. The colourful products, cultural stories, and handcrafted collections create an experience customers remember.</p>
+    <p>The goal of this redesign is to translate that experience into a beautiful digital destination that attracts tourists, locals, and online shoppers — while preserving the authenticity that makes Baris' store special.</p>
+    <a href="#" class="btn btn-primary">Let's Build It Together</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h4>Grand Bazaar Niagara</h4>
+        <p>A world of handcrafted treasures in the heart of Niagara Falls — curated piece by piece by Baris.</p>
+      </div>
+      <div>
+        <h4>Visit</h4>
+        <ul>
+          <li>5851 Victoria Avenue, Unit A</li>
+          <li>Beside the Vittoria Inn</li>
+          <li>Niagara Falls, ON</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#collections">Collections</a></li>
+          <li><a href="#origin">Shop by Origin</a></li>
+          <li><a href="#curator">Meet Baris</a></li>
+          <li><a href="#giftguide">Gift Guide</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Grand Bazaar Niagara</span>
+      <span>Design proposal by Custom Exclusive Socials</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
